@@ -1,0 +1,23 @@
+{% extends "sales/base.html" %}
+
+{% block title %}Sales Overview{% endblock %}
+
+{% block content %}
+    <h1>{{client}}</h1>
+    <div id="vizContainer"></div>
+    <script>
+        function initViz() {
+            var containerDiv = document.getElementById("vizContainer"),
+            url = "https://us-east-1.online.tableau.com/t/fleurametz/views/SalesAnalysis/clientweekly?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no";
+            options = {
+                "client": "{{client}}",
+                "week": "Week {{ week }}",
+                hideTabs: true,
+                hideToolbar: true,
+            };
+            var viz = new tableau.Viz(containerDiv, url,options);
+        }
+        initViz();
+    </script>
+
+{% endblock %}
